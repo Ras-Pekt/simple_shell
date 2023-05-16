@@ -17,11 +17,11 @@ char *_getenv(const char *name)
 
 	while (environ[i])
 	{
-		dupEnv = strdup(environ[i]);
+		dupEnv = str_dup(environ[i]);
 		token = strtok(dupEnv, "=");
 		if (strcmp(token, name) == 0)
 		{
-			result = strdup(strtok(NULL, "="));
+			result = str_dup(strtok(NULL, "="));
 			free(dupEnv);
 			return (result);
 		}
@@ -70,11 +70,11 @@ char *_getpath(char *str)
 
 	while (line)
 	{
-		file_path = strcat(line->str, str);
+		file_path = str_cat(line->str, str);
 
 		if (access(file_path, X_OK) == 0)
 		{
-			copy = strdup(file_path);
+			copy = str_dup(file_path);
 			free_list(line);
 			return (copy);
 		}
@@ -102,7 +102,7 @@ list_t *add_node(list_t **head, const char *str)
 	if (newNode == NULL)
 		return (NULL);
 
-	newNode->str = strcat(strdup(str), "/");
+	newNode->str = str_cat(str_dup(str), "/");
 	newNode->next = *head;
 	*head = newNode;
 

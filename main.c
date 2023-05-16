@@ -35,9 +35,9 @@ int main(int ac, char **av, char **env)
 
 		if (tok_return > 0)
 		{
-			if (strcmp(argv[0], "exit") == 0)
+			if (str_cmp(argv[0], "exit") == 0)
 				_argExit(argv);
-			else if (strcmp(argv[0], "env") == 0)
+			else if (str_cmp(argv[0], "env") == 0)
 				_env(env);
 			else
 				_execute(argv, av[0], env);

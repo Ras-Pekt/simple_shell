@@ -34,6 +34,9 @@ list_t *_path(void);
 char *_getpath(char *str);
 list_t *add_node(list_t **head, const char *str);
 void free_list(list_t *head);
-
-
+int str_len(char *s);
+char *str_cpy(char *dest, char *src);
+int str_cmp(char *s1, char *s2);
+char *str_dup(const char *str);
+char *str_cat(char *dest, char *src);
 #endif
