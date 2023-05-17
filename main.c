@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * main - Entry point
- * @ac: argument count
- * @av: argument vector
- * @env: environ array
- * Return: 0 on success
- */
+* main - Entry point
+* @ac: argument count
+* @av: argument vector
+* @env: environ array
+* Return: 0 on success
+*/
 int main(int ac, char **av, char **env)
 {
 	char *str;
@@ -49,10 +49,10 @@ int main(int ac, char **av, char **env)
 	return (0);
 }
 /**
- * _puts - writes a string to stdout
- * @str: The string to print
- * Return: number of elements printed
- */
+* _puts - writes a string to stdout
+* @str: The string to print
+* Return: number of elements printed
+*/
 int _puts(char *str)
 {
 	int i;

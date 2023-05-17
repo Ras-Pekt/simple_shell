@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * _getenv - iterates through the environ global variable
- *	to locate a specific variable
- * @name: name of the global variable being searched for.
- *	it is passed in uppercase
- *	global variables are typical declared in uppercase)
- * Return: the value of the specified environ global variable.
- *	EXIT_FAILURE with appropriate error message otherwise
- */
+* _getenv - iterates through the environ global variable
+*	to locate a specific variable
+* @name: name of the global variable being searched for.
+*	it is passed in uppercase
+*	global variables are typical declared in uppercase)
+* Return: the value of the specified environ global variable.
+*	EXIT_FAILURE with appropriate error message otherwise
+*/
 char *_getenv(const char *name)
 {
 	int i = 0;
@@ -32,13 +32,13 @@ char *_getenv(const char *name)
 	return (NULL);
 }
 /**
- * _path - creates a linked list using the add_node function
- *	where each node represents a directory path
- *	extracted from the PATH environment variable
- *	The function takes no argument as the "PATH" varianble is hard coded
- * Return: the function returns a head pointer
- *	that points to the first node in the linked list
- */
+* _path - creates a linked list using the add_node function
+*	where each node represents a directory path
+*	extracted from the PATH environment variable
+*	The function takes no argument as the "PATH" varianble is hard coded
+* Return: the function returns a head pointer
+*	that points to the first node in the linked list
+*/
 list_t *_path(void)
 {
 	char *str, *token;
@@ -58,11 +58,11 @@ list_t *_path(void)
 	return (head);
 }
 /**
- * _getpath - gets the path associated with the command shortform
- *	input by the user
- * @str: command shortform input by the user (e.g. ls)
- * Return: the full path to the command shortform (e.g. /bin/ls)
- */
+* _getpath - gets the path associated with the command shortform
+*	input by the user
+* @str: command shortform input by the user (e.g. ls)
+* Return: the full path to the command shortform (e.g. /bin/ls)
+*/
 char *_getpath(char *str)
 {
 	list_t *line = _path();
@@ -86,11 +86,11 @@ char *_getpath(char *str)
 	return (NULL);
 }
 /**
- * add_node - adds a new node at the beginning of a list
- * @head: first node
- * @str: input string
- * Return: address of new node
- */
+* add_node - adds a new node at the beginning of a list
+* @head: first node
+* @str: input string
+* Return: address of new node
+*/
 list_t *add_node(list_t **head, const char *str)
 {
 	list_t *newNode;
@@ -109,10 +109,10 @@ list_t *add_node(list_t **head, const char *str)
 	return (*head);
 }
 /**
- * free_list - frees a list
- * @head: first node
- * Return: void
- */
+* free_list - frees a list
+* @head: first node
+* Return: void
+*/
 void free_list(list_t *head)
 {
 	list_t *temp;

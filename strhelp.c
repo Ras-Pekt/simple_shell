@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * str_cmp - compare string values
- * @s1: string 1
- * @s2: string 2
- *
- * Return: s1[i] - s2[i]
- */
+* str_cmp - compare string values
+* @s1: string 1
+* @s2: string 2
+*
+* Return: s1[i] - s2[i]
+*/
 int str_cmp(char *s1, char *s2)
 {
 	int i = 0;
@@ -19,13 +19,13 @@ int str_cmp(char *s1, char *s2)
 }
 
 /**
- * str_dup - returns a pointer to a newly allocated
- *space in memory, which contains a copy of the
- *string given as a parameter.
- *@str:String to be copied
- *
- * Return: NULL in case of error, pointer to allocated space.
- */
+* str_dup - returns a pointer to a newly allocated
+*space in memory, which contains a copy of the
+*string given as a parameter.
+*@str:String to be copied
+*
+* Return: NULL in case of error, pointer to allocated space.
+*/
 char *str_dup(const char *str)
 {
 	char *cpy;
@@ -56,7 +56,7 @@ char *str_dup(const char *str)
 *@src: pointer to source string.
 *
 *Return: pointer to destination string.
- */
+*/
 char *str_cat(char *dest, char *src)
 {
 	int i;
@@ -77,4 +77,25 @@ char *str_cat(char *dest, char *src)
 
 	dest[i] = '\0';
 	return (dest);
+}
+
+/**
+*  _atoi - converts string into integers
+* @str: input string
+* Return: converted string to integer
+*/
+int _atoi(char *str)
+{
+	int sign = 1, convNum = 0;
+
+	for (; *str; str++)
+	{
+		if (*str == '-')
+			sign *= -1;
+		else if (*str >= '0' && *str <= '9')
+			convNum = (*str >= '0' + (convNum * 10));
+		else if (convNum > 0)
+			break;
+	}
+	return (convNum * sign);
 }

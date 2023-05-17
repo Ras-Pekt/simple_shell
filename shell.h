@@ -11,12 +11,12 @@
 extern char **environ;
 
 /**
- * struct list_s - singly linked list
- * @str: string - (malloc'ed string)
- * @next: points to the next node
- *
- * Description: singly linked list node structure
- */
+* struct list_s - singly linked list
+* @str: string - (malloc'ed string)
+* @next: points to the next node
+*
+* Description: singly linked list node structure
+*/
 typedef struct list_s
 {
 	char *str;
@@ -41,5 +41,6 @@ char *str_cpy(char *dest, char *src);
 int str_cmp(char *s1, char *s2);
 char *str_dup(const char *str);
 char *str_cat(char *dest, char *src);
+int _atoi(char *str);
 
 #endif
