@@ -1,55 +1,6 @@
 #include "shell.h"
 
 /**
- * str_len - Returns the length of a string
- * @s: The string to get the length of
- *
- * Return: The length of @s.
- */
-
-int str_len(char *s)
-{
-	int i = 0;
-
-	while (*s++)
-		i++;
-
-	return (i);
-}
-
-/**
- *str_cpy - copies the string pointed to by src
- * including the terminating null byte (\0)
- * to the buffer pointed to by dest
- * @dest: pointer to the buffer in which we copy the string
- * @src: string to be copied
- *
- * Return: the pointer to dest
- */
-
-char *str_cpy(char *dest, char *src)
-{
-	int len, i;
-
-	len = 0;
-
-	while (src[len] != '\0')
-	{
-		len++;
-	}
-
-	for (i = 0; i < len; i++)
-	{
-		dest[i] = src[i];
-	}
-
-	dest[i] = '\0';
-
-	return (dest);
-}
-
-
-/**
  * str_cmp - compare string values
  * @s1: string 1
  * @s2: string 2
@@ -83,14 +34,14 @@ char *str_dup(const char *str)
 	if (str == NULL)
 		return (NULL);
 	/*determining length of string given*/
-	for (index = 0; str[index]; index++)
-		len++;
+	for (len = 0; str[len]; len++)
+		;
 	cpy = malloc(sizeof(char) * (len + 1));
 
 	if (cpy == NULL)
 		return (NULL);
-	/* copying @str string into the new string(cpy)*/
-	for (index = 0; str[index]; index++)
+	/*copying @str string into the new string(cpy)*/
+	for (index = 0; index < len; index++)
 	{
 		cpy[index] = str[index];
 	}
@@ -98,4 +49,32 @@ char *str_dup(const char *str)
 	cpy[len] = '\0';
 
 	return (cpy);
+}
+/**
+*str_cat - function that concatenates two strings.
+*@dest: pointer to destination string.
+*@src: pointer to source string.
+*
+*Return: pointer to destination string.
+ */
+char *str_cat(char *dest, char *src)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (dest[i] != '\0')
+	{
+		i++;
+	}
+	j = 0;
+	while (src[j] != '\0')
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+
+	dest[i] = '\0';
+	return (dest);
 }

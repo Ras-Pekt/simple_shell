@@ -55,7 +55,7 @@ int _execute(char **tokenArray, char *av, char **env)
 
 	if (access(tokenArray[0], X_OK) != 0 && path == NULL)
 	{
-		write(STDIN_FILENO, error, str_len(error));
+		_puts(error);
 		perror(" ");
 		return (-1);
 	}
@@ -84,13 +84,12 @@ int _execute(char **tokenArray, char *av, char **env)
  */
 int _env(char **env)
 {
-	int i = 0, len = 0;
+	int i = 0;
 
 	while (env[i])
 	{
-		len = str_len(env[i]);
-		write(STDOUT_FILENO, env[i], len);
-		write(STDOUT_FILENO, "\n", 1);
+		_puts(env[i]);
+		_puts("\n");
 		i++;
 	}
 	return (i);

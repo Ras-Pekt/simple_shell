@@ -19,14 +19,14 @@ int main(int ac, char **av, char **env)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "vsh$ ", 5);
+			_puts("vsh$ ");
 
 		str = _read();
 
 		if (str == NULL)
 		{
 			if (isatty(STDIN_FILENO))
-				write(STDOUT_FILENO, "\n", 1);
+				_puts("\n");
 			free(str);
 			exit(EXIT_SUCCESS);
 		}
@@ -47,4 +47,20 @@ int main(int ac, char **av, char **env)
 	}
 
 	return (0);
+}
+/**
+ * _puts - writes a string to stdout
+ * @str: The string to print
+ * Return: number of elements printed
+ */
+int _puts(char *str)
+{
+	int i;
+
+	for (i = 0; str[i] != '\0'; i++)
+		;
+
+	write(STDOUT_FILENO, str, i);
+
+	return (i);
 }

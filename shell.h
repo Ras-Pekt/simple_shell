@@ -23,6 +23,8 @@ typedef struct list_s
 	struct list_s *next;
 } list_t;
 
+int _puts(char *str);
+
 char *_read();
 int splitString(char *str, char **tokenArray);
 int _execute(char **tokenArray, char *av, char **env);
@@ -39,4 +41,5 @@ char *str_cpy(char *dest, char *src);
 int str_cmp(char *s1, char *s2);
 char *str_dup(const char *str);
 char *str_cat(char *dest, char *src);
+
 #endif
