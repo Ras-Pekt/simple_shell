@@ -40,13 +40,14 @@ int splitString(char *str, char **tokenArray)
 	return (i);
 }
 /**
-* _execute - executes execve by forking parent process
-* @tokenArray: array of tokens
-* @av: argument vector
-* @env: environ array
-* Return: void
-*/
-int _execute(char **tokenArray, char *av, char **env)
+ * _execute - executes execve by forking parent process
+ * @tokenArray: array of tokens
+ * @count: count of processes
+ * @av: argument vector
+ * @env: environ array
+ * Return: void
+ */
+int _execute(char **tokenArray, int count, char *av, char **env)
 {
 	pid_t pid;
 	int status;
@@ -55,8 +56,7 @@ int _execute(char **tokenArray, char *av, char **env)
 
 	if (access(tokenArray[0], X_OK) != 0 && path == NULL)
 	{
-		_puts(error);
-		perror(" ");
+		_perror(error, count, tokenArray);
 		return (-1);
 	}
 
@@ -102,7 +102,19 @@ int _env(char **env)
 void _argExit(char **tokenArray)
 {
 	if (tokenArray[1] != NULL)
-		exit(_atoi(tokenArray[1]));
+	{
+		int i = _atoi(tokenArray[1]);
+
+		if (i < 0)
+		{
+			_puts(":Illegal Number: ");
+			_puts(tokenArray[1]);
+			_puts("\n");
+			return;
+		}
+		else
+			exit(i);
+	}
 	else
 		exit(EXIT_SUCCESS);
 }
