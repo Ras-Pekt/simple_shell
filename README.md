@@ -3,10 +3,14 @@ This is a collaborative project in the ALXSE program to build a simple shell in 
 
 ## Installation
 Clone this repositiory. Once the files are in the local working directory, compile the code with gcc with the following flags:
+	```
 	gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o vsh
+	```
 
 To run the shell, simply run the command:
+	```
 	./vsh
+	```
 
 ## Functions Used:
 	-isatty()
