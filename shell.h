@@ -26,13 +26,13 @@ typedef struct list_s
 int _puts(char *str);
 void _putint(int n);
 void _perror(char *av, int count, char **tokenArray);
-void prompt();
+void prompt(void);
 
 char *_read();
 int splitString(char *str, char **tokenArray);
 int _execute(char **tokenArray, int count, char *av, char **env);
 int _env(char **env);
-void _argExit(char **tokenArray);
+void _argExit(char *av, int count, char *str, char **tokenArray);
 
 char *_getenv(const char *name);
 list_t *_path(void);

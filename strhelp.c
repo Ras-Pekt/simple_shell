@@ -12,9 +12,8 @@ int str_cmp(char *s1, char *s2)
 	int i = 0;
 
 	while ((s1[i] == s2[i]) && (s1[i] != '\0'))
-	{
 		i++;
-	}
+
 	return (s1[i] - s2[i]);
 }
 
@@ -33,18 +32,16 @@ char *str_dup(const char *str)
 
 	if (str == NULL)
 		return (NULL);
-	/*determining length of string given*/
+
 	for (len = 0; str[len]; len++)
 		;
-	cpy = malloc(sizeof(char) * (len + 1));
 
+	cpy = malloc(sizeof(char) * (len + 1));
 	if (cpy == NULL)
 		return (NULL);
-	/*copying @str string into the new string(cpy)*/
+
 	for (index = 0; index < len; index++)
-	{
 		cpy[index] = str[index];
-	}
 
 	cpy[len] = '\0';
 
@@ -64,9 +61,8 @@ char *str_cat(char *dest, char *src)
 
 	i = 0;
 	while (dest[i] != '\0')
-	{
 		i++;
-	}
+
 	j = 0;
 	while (src[j] != '\0')
 	{

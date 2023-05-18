@@ -96,10 +96,13 @@ int _env(char **env)
 }
 /**
 * _argExit - handles arguments for builtin exit
+* @av: name of the shell
+* @count: count of process iterations
+* @str: malloc'ed strings
 * @tokenArray: array of user input
 * Return: void
 */
-void _argExit(char **tokenArray)
+void _argExit(char *av, int count, char *str, char **tokenArray)
 {
 	if (tokenArray[1] != NULL)
 	{
@@ -107,14 +110,21 @@ void _argExit(char **tokenArray)
 
 		if (i < 0)
 		{
-			_puts(":Illegal Number: ");
+			_puts(av), _puts(": "), _putint(count);
+			_puts(": exit: Illegal number: ");
 			_puts(tokenArray[1]);
 			_puts("\n");
 			return;
 		}
 		else
+		{
+			free(str);
 			exit(i);
+		}
 	}
 	else
+	{
+		free(str);
 		exit(EXIT_SUCCESS);
+	}
 }

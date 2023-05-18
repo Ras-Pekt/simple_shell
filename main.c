@@ -35,7 +35,7 @@ int main(int ac, char **av, char **env)
 		if (tok_return > 0)
 		{
 			if (str_cmp(argv[0], "exit") == 0)
-				_argExit(argv);
+				_argExit(av[0], count, str, argv);
 			else if (str_cmp(argv[0], "env") == 0)
 				_env(env);
 			else
@@ -113,11 +113,8 @@ void _perror(char *av, int count, char **tokenArray)
 * prompt - displays the prompt
 * Return: nothing
 */
-void prompt()
+void prompt(void)
 {
-
 	if (isatty(STDIN_FILENO))
-	{
 		_puts("vsh$ ");
-	}
 }
