@@ -16,26 +16,30 @@ This is a collaborative project in the ALXSE program to build a simple shell in 
 * gcc (GNU Compiler)
 
 ## How to use
-	1. Clone the repository to your local machine
-`
 
+	1. Clone the repository to your local machine
+
+```
 	$ git clone https://github.com/Ras-Pekt/simple_shell
-`
+```
+
 	2. Navigate to the project directory
 
-`
+```
 	$ cd simple_shell
-`
+```
 
 	3. Compile the program
-`
+
+```
 	gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o vsh
-`
+```
+
 	4. Run the shell script
 
-`
+```
 	./vsh
-`
+```
 	5. The shell prompt will appear and you can execute these commands
 
 ```
