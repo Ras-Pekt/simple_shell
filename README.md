@@ -3,6 +3,7 @@ This is a collaborative project in the ALXSE program to build a simple shell in 
 
 ## Installation
 Clone this repositiory. Once the files are in the local working directory, compile the code with gcc with the following flags:
+
 	```
 	gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o vsh
 	```
@@ -25,16 +26,16 @@ To run the shell, simply run the command:
 	-malloc()
 
 ## Usage
- The shell is designed to work in both interactive
- ```
+The shell is designed to work in both interactive
+```
 	$ ./vsh
 	my_sh$ ls
 	main.c	mysh  shell.c  test_ls_2
 	my_sh$ exit
 	$
- ```
- and non-interactive mode
- ```
+```
+and non-interactive mode
+```
 	$ cat test_ls_2
 	/bin/ls
 	/bin/ls
@@ -42,5 +43,5 @@ To run the shell, simply run the command:
 	main.c	mysh  shell.c  test_ls_2
 	main.c	mysh  shell.c  test_ls_2
 	$
- ```
+```
 

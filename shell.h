@@ -26,7 +26,7 @@ typedef struct list_s
 int _puts(char *str);
 void _putint(int n);
 void _perror(char *av, int count, char **tokenArray);
-void prompt(char *av);
+void prompt();
 
 char *_read();
 int splitString(char *str, char **tokenArray);

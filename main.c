@@ -20,7 +20,7 @@ int main(int ac, char **av, char **env)
 	{
 		int *ptr_count = &count;
 
-		prompt(av[0]);
+		prompt();
 
 		str = _read();
 		if (str == NULL)
@@ -64,10 +64,10 @@ int _puts(char *str)
 	return (i);
 }
 /**
- * _putint - prints any integer using _puts
- * @n: input integer
- * Return: nothing
- */
+* _putint - prints any integer using _puts
+* @n: input integer
+* Return: nothing
+*/
 void _putint(int n)
 {
 	char temp, str[10];
@@ -94,12 +94,12 @@ void _putint(int n)
 	_puts(str);
 }
 /**
- * _perror - prints error of commands not found
- * @av: name of the shell
- * @count: shell iteration count
- * @tokenArray: array containing user tokenized string
- * Return: nothing
- */
+* _perror - prints error of commands not found
+* @av: name of the shell
+* @count: shell iteration count
+* @tokenArray: array containing user tokenized string
+* Return: nothing
+*/
 void _perror(char *av, int count, char **tokenArray)
 {
 	_puts(av);
@@ -110,17 +110,14 @@ void _perror(char *av, int count, char **tokenArray)
 	_puts(": not found\n");
 }
 /**
- * prompt - displays the prompt
- * @av: 1st arg of argv array
- * Return: nothing
- */
-void prompt(char *av)
+* prompt - displays the prompt
+* Return: nothing
+*/
+void prompt()
 {
-	char *ch = av;
 
 	if (isatty(STDIN_FILENO))
 	{
-		_puts(ch);
-		_puts("$ ");
+		_puts("vsh$ ");
 	}
 }
