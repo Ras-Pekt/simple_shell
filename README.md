@@ -12,8 +12,9 @@ This is a collaborative project in the ALXSE program to build a simple shell in 
 	-exit()
 	-free()
 	-malloc()
+## Requirements
+* gcc (GNU Compiler)
 
-```
 ## How to use
 	1. Clone the repository to your local machine
 `
@@ -49,6 +50,7 @@ This is a collaborative project in the ALXSE program to build a simple shell in 
 	vsh$ cat <filename>
 	vsh$ clear
 	vsh$ exit
+```
 
 ## Usage
 The shell is designed to work in both **interactive**
