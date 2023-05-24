@@ -21,6 +21,7 @@ char *_read()
 * splitString - splits string and stores into array
 * @str: input string from user
 * @tokenArray: array to store split string
+* @max: maximum size of array
 * Return: number of tokens
 */
 int splitString(char *str, char **tokenArray, int max)
@@ -52,7 +53,7 @@ int _execute(char **tokenArray, int count, char *av, char **env)
 	pid_t pid;
 	int status;
 	char *error = av;
-	char *path = _getpath(tokenArray[0]); // ls
+	char *path = _getpath(tokenArray[0]);
 
 	if (access(tokenArray[0], X_OK) != 0 && path == NULL)
 	{
