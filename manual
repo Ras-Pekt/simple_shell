@@ -1,0 +1,10 @@
+SHELL PROJECT MAN
+
+description
+
+Prompt user for command
+Check whether the input is a valid command
+Validate the user input
+Getline reads the input and tokenised by strtok
+Execute the user input using execve
+Handling function errors and arguments

@@ -1,48 +1,38 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef HEADER_FILE
+#define HEADER_FILE
 
 #include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <signal.h>
 
 extern char **environ;
 
-/**
-* struct list_s - singly linked list
-* @str: string - (malloc'ed string)
-* @next: points to the next node
-*
-* Description: singly linked list node structure
-*/
-typedef struct list_s
-{
-	char *str;
-	struct list_s *next;
-} list_t;
+void _path(char **cmd);
+ssize_t str_len(char *s);
+int str_cmp(char *st1, char *st2);
+char *str_cpy(char *destn, char *src);
+char *app_string(char *destn, const char *src);
+void depart(char **cmd, char *ln);
+int str_cmp2(const char *st1, const char *st2);
+int atoi_(char *s);
+void envr(void);
+int put_char(char c);
+void snal_H(__attribute__((unused)) int s_num);
+int str_len2(char *s);
+void clear_array(char **array);
+void put_char2(char *c);
+void lup(int inpt);
+void ex_cd(char **cmd);
+void *rea_lloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char *str_dup(char *str);
+char **str_splt(char *ln, char *delim);
+char *strn_cpy(char *dest, const char *src, size_t n);
+ssize_t my_puts(char *s);
 
-int _puts(char *str);
-void _putint(int n);
-void _perror(char *av, int count, char **tokenArray);
-void prompt(void);
-
-char *_read();
-int splitString(char *str, char **tokenArray);
-int _execute(char **tokenArray, int count, char *av, char **env);
-int _env(char **env);
-void _argExit(char *av, int count, char *str, char **tokenArray);
-
-char *_getenv(const char *name);
-list_t *_path(void);
-char *_getpath(char *str);
-list_t *add_node(list_t **head, const char *str);
-void free_list(list_t *head);
-
-int str_cmp(char *s1, char *s2);
-char *str_dup(const char *str);
-char *str_cat(char *dest, char *src);
-int _atoi(char *str);
 
 #endif
