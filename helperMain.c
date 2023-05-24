@@ -29,17 +29,17 @@ int splitString(char *str, char **tokenArray, int max)
 	int i = 0;
 	char *token;
 
-	token = strtok(str, " \n");
+	token = strtok(str, " \n#");
 
 	while (token && i < max)
 	{
-		if (token[0] == '#')
-		{
-			break;
-		}
+		/*if (token[0] == '#')*/
+		/*{*/
+		/*	break;*/
+		/*}*/
 		tokenArray[i] = token;
 		i++;
-		token = strtok(NULL, " \n");
+		token = strtok(NULL, " \n#");
 	}
 	tokenArray[i] = NULL;
 	return (i);
