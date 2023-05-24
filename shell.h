@@ -45,4 +45,9 @@ char *str_dup(const char *str);
 char *str_cat(char *dest, char *src);
 int _atoi(char *str);
 
+void _setenv(char **tokenArray);
+void _unsetenv(char **tokenArray);
+void _chdir(char **tokenArray);
+int _puterror(char *str);
+
 #endif

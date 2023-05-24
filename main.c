@@ -38,6 +38,12 @@ int main(int ac, char **av, char **env)
 				_argExit(av[0], count, str, argv);
 			else if (str_cmp(argv[0], "env") == 0)
 				_env(env);
+			else if (str_cmp(argv[0], "setenv") == 0)
+				_setenv(argv);
+			else if (str_cmp(argv[0], "unsetenv") == 0)
+				_unsetenv(argv);
+			else if (str_cmp(argv[0], "cd") == 0)
+				_chdir(argv);
 			else
 				_execute(argv, count, av[0], env);
 		}
