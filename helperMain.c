@@ -33,6 +33,10 @@ int splitString(char *str, char **tokenArray, int max)
 
 	while (token && i < max)
 	{
+		if (token[0] == '#')
+		{
+			break;
+		}
 		tokenArray[i] = token;
 		i++;
 		token = strtok(NULL, " \n");
@@ -41,13 +45,13 @@ int splitString(char *str, char **tokenArray, int max)
 	return (i);
 }
 /**
- * _execute - executes execve by forking parent process
- * @tokenArray: array of tokens
- * @count: count of processes
- * @av: argument vector
- * @env: environ array
- * Return: void
- */
+* _execute - executes execve by forking parent process
+* @tokenArray: array of tokens
+* @count: count of processes
+* @av: argument vector
+* @env: environ array
+* Return: void
+*/
 int _execute(char **tokenArray, int count, char *av, char **env)
 {
 	pid_t pid;
