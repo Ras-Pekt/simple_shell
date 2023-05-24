@@ -62,7 +62,7 @@ int _execute(char **tokenArray, int count, char *av, char **env)
 	}
 
 	pid = fork();
-	
+
 	if (pid == 0)
 	{
 		if (access(tokenArray[0], X_OK) == 0)
