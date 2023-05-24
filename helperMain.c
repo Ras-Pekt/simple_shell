@@ -62,9 +62,7 @@ int _execute(char **tokenArray, int count, char *av, char **env)
 	}
 
 	pid = fork();
-	if (pid == -1)
-		perror("Folk failed");
-
+	
 	if (pid == 0)
 	{
 		if (access(tokenArray[0], X_OK) == 0)
@@ -72,8 +70,16 @@ int _execute(char **tokenArray, int count, char *av, char **env)
 		else
 			execve(path, tokenArray, env);
 	}
+	else if (pid > 0)
+	{
+		if (wait(&status) == -1)
+		{
+			perror("Wait failed");
+			return (-1);
+		}
+	}
 	else
-		wait(&status);
+		perror("Folk failed");
 
 	free(path);
 	return (0);
