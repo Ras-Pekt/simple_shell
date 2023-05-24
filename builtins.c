@@ -54,7 +54,7 @@ void _chdir(char **tokenArray)
 			_puterror(": cd: OLDPWD not set\n");
 		else if (chdir(_getenv("OLDPWD")) != 0)
 			perror("cd");
-		
+
 		setenv("OLDPWD", nxtOldPwd, 1);
 		setenv("PWD", getcwd(path, 128), 1);
 	}

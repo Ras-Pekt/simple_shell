@@ -21,7 +21,6 @@ int main(int ac, char **av, char **env)
 		int *ptr_count = &count;
 
 		prompt();
-
 		str = _read();
 		if (str == NULL)
 		{
@@ -30,7 +29,6 @@ int main(int ac, char **av, char **env)
 			free(str);
 			exit(EXIT_SUCCESS);
 		}
-
 		tok_return = splitString(str, argv, 1024);
 		if (tok_return > 0)
 		{
@@ -50,7 +48,6 @@ int main(int ac, char **av, char **env)
 		free(str);
 		*ptr_count = count + 1;
 	}
-
 	return (0);
 }
 /**
