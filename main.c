@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
 * main - Entry point
 * @ac: argument count
@@ -9,9 +8,9 @@
 */
 int main(int ac, char **av, char **env)
 {
-	char *str;
-	int tok_return;
+	char *str = NULL;
 	char *argv[1024];
+	int tok_return;
 	static int count = 1;
 
 	(void)ac;
@@ -22,15 +21,9 @@ int main(int ac, char **av, char **env)
 
 		prompt();
 		str = _read();
-		if (str == NULL)
-		{
-			if (isatty(STDIN_FILENO))
-				_puts("\n");
-			free(str);
-			exit(EXIT_SUCCESS);
-		}
+		ctrl_d(str);
 		tok_return = splitString(str, argv, 1024);
-		if (tok_return > 0)
+		if  (tok_return > 0)
 		{
 			if (str_cmp(argv[0], "exit") == 0)
 				_argExit(av[0], count, str, argv);
@@ -43,11 +36,12 @@ int main(int ac, char **av, char **env)
 			else if (str_cmp(argv[0], "cd") == 0)
 				_chdir(argv);
 			else
-				_execute(argv, count, av[0], env);
+				_execute(argv, count, av[0]);
 		}
 		free(str);
 		*ptr_count = count + 1;
 	}
+
 	return (0);
 }
 /**
@@ -96,22 +90,7 @@ void _putint(int n)
 	}
 	_puts(str);
 }
-/**
-* _perror - prints error of commands not found
-* @av: name of the shell
-* @count: shell iteration count
-* @tokenArray: array containing user tokenized string
-* Return: nothing
-*/
-void _perror(char *av, int count, char **tokenArray)
-{
-	_puts(av);
-	_puts(": ");
-	_putint(count);
-	_puts(": ");
-	_puts(tokenArray[0]);
-	_puts(": not found\n");
-}
+
 /**
 * prompt - displays the prompt
 * Return: nothing
@@ -119,5 +98,20 @@ void _perror(char *av, int count, char **tokenArray)
 void prompt(void)
 {
 	if (isatty(STDIN_FILENO))
-		_puts("vsh$ ");
+		write(STDOUT_FILENO, "vsh$ ", 5);
+}
+/**
+ * ctrl_d - checks for EOF
+ * @str: input string
+ * Return: nothing
+ */
+void ctrl_d(char *str)
+{
+	if (str == NULL)
+	{
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "\n", 1);
+		free(str);
+		exit(EXIT_SUCCESS);
+	}
 }

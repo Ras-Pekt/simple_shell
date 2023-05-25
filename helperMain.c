@@ -13,7 +13,7 @@ char *_read()
 	if (getline(&line, &n, stdin) == -1)
 	{
 		free(line);
-		return (NULL);
+		return (NULL); /* end of file */
 	}
 	return (line);
 }
@@ -30,10 +30,9 @@ int splitString(char *str, char **tokenArray, int max)
 	char *token;
 
 	token = strtok(str, " \n");
-
-	while (token && i < max)
+	while (token != NULL && i < max)
 	{
-		if (token[0] == '#')
+		if (str_cmp(token, "#") == 0)
 		{
 			break;
 		}
@@ -49,93 +48,64 @@ int splitString(char *str, char **tokenArray, int max)
 * @tokenArray: array of tokens
 * @count: count of processes
 * @av: argument vector
-* @env: environ array
 * Return: void
 */
-int _execute(char **tokenArray, int count, char *av, char **env)
+
+void _execute(char **tokenArray, int count, char *av)
 {
 	pid_t pid;
 	int status;
 	char *error = av;
-	char *path = _getpath(tokenArray[0]);
+	char *path = _check_executable(tokenArray);
 
-	if (access(tokenArray[0], X_OK) != 0 && path == NULL)
+	if (path == NULL)
 	{
 		_perror(error, count, tokenArray);
-		return (-1);
+		return;
 	}
 
 	pid = fork();
-
 	if (pid == 0)
 	{
-		if (access(tokenArray[0], X_OK) == 0)
-			execve(tokenArray[0], tokenArray, env);
-		else
-			execve(path, tokenArray, env);
+		if (execve(path, tokenArray, environ) == -1)
+		{
+			perror("execve failure");
+			return;
+		}
 	}
 	else if (pid > 0)
 	{
 		if (wait(&status) == -1)
 		{
-			perror("Wait failed");
-			return (-1);
-		}
-	}
-	else
-		perror("Folk failed");
-
-	free(path);
-	return (0);
-}
-/**
-* _env - prints the current environment
-* @env: environment array
-* Return: No. of env variables printed
-*/
-int _env(char **env)
-{
-	int i = 0;
-
-	while (env[i])
-	{
-		_puts(env[i]);
-		_puts("\n");
-		i++;
-	}
-	return (i);
-}
-/**
-* _argExit - handles arguments for builtin exit
-* @av: name of the shell
-* @count: count of process iterations
-* @str: malloc'ed strings
-* @tokenArray: array of user input
-* Return: void
-*/
-void _argExit(char *av, int count, char *str, char **tokenArray)
-{
-	if (tokenArray[1] != NULL)
-	{
-		int i = _atoi(tokenArray[1]);
-
-		if (i < 0)
-		{
-			_puts(av), _puts(": "), _putint(count);
-			_puts(": exit: Illegal number: ");
-			_puts(tokenArray[1]);
-			_puts("\n");
+			perror("wait failed");
 			return;
 		}
-		else
-		{
-			free(str);
-			exit(i);
-		}
+
+	}
+	else
+		perror("fork failed");
+}
+/**
+ * _check_executable - checks if user's input is an executable file
+ * @tokenArray: array of user's input
+ * Return: path. NULL otherwise
+ */
+char *_check_executable(char **tokenArray)
+{
+	char *path;
+
+	if (access(tokenArray[0], X_OK) == 0)
+	{
+		path = tokenArray[0];
+		return (path);
 	}
 	else
 	{
-		free(str);
-		exit(EXIT_SUCCESS);
+		path = _getpath(tokenArray[0]);
+
+		if (path == NULL)
+			return (NULL);
+		else
+			return (path);
 	}
 }

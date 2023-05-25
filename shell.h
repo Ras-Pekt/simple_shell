@@ -2,11 +2,14 @@
 #define SHELL_H
 
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
+#include <unistd.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <errno.h>
 
 extern char **environ;
 
@@ -23,31 +26,36 @@ typedef struct list_s
 	struct list_s *next;
 } list_t;
 
-int _puts(char *str);
 void _putint(int n);
+int _puts(char *str);
 void _perror(char *av, int count, char **tokenArray);
 void prompt(void);
-
-char *_read();
-int splitString(char *str, char **tokenArray,  int max);
-int _execute(char **tokenArray, int count, char *av, char **env);
-int _env(char **env);
-void _argExit(char *av, int count, char *str, char **tokenArray);
-
-char *_getenv(const char *name);
-list_t *_path(void);
-char *_getpath(char *str);
-list_t *add_node(list_t **head, const char *str);
-void free_list(list_t *head);
+void ctrl_d(char *str);
 
 int str_cmp(char *s1, char *s2);
 char *str_dup(const char *str);
 char *str_cat(char *dest, char *src);
-int _atoi(char *str);
+int str_len(char *s);
+int strn_cmp(const char *s1, const char *s2, size_t num);
 
+char *_check_executable(char **argv);
+void _execute(char **tokenArray, int count, char *av);
+char *_read();
+int splitString(char *str, char **tokenArray, int max);
+
+void free_list(list_t *head);
+list_t *_path(void);
+char *_getpath(char *str);
+char *_getenv(const char *name);
+
+int _atoi(char *str);
+char *str_cpy(char *dest, char *src);
+int _puterror(char *str);
+
+void _argExit(char *av, int count, char *str, char **tokenArray);
+int _env(char **env);
 void _setenv(char **tokenArray);
 void _unsetenv(char **tokenArray);
 void _chdir(char **tokenArray);
-int _puterror(char *str);
 
 #endif

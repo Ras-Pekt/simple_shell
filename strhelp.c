@@ -19,9 +19,9 @@ int str_cmp(char *s1, char *s2)
 
 /**
 * str_dup - returns a pointer to a newly allocated
-*space in memory, which contains a copy of the
-*string given as a parameter.
-*@str:String to be copied
+* space in memory, which contains a copy of the
+* string given as a parameter.
+* @str:String to be copied
 *
 * Return: NULL in case of error, pointer to allocated space.
 */
@@ -74,23 +74,43 @@ char *str_cat(char *dest, char *src)
 	dest[i] = '\0';
 	return (dest);
 }
-/**
- * _atoi - converts string into integers
- * @str: input string
- * Return: converted string to integer
- */
-int _atoi(char *str)
-{
-	int sign = 1, convNum = 0;
 
-	for (; *str; str++)
+/**
+ * str_len - calculates length of a string
+ * @s: input variable
+ * Return: length of string
+ */
+int str_len(char *s)
+{
+	int sum = 0;
+
+	while (*(s + sum) != '\0')
 	{
-		if (*str == '-')
-			sign *= -1;
-		else if (*str >= '0' && *str <= '9')
-			convNum = (*str - '0') + (convNum * 10);
-		else if (convNum > 0)
-			break;
+		sum = sum + 1;
 	}
-	return (convNum * sign);
+	return (sum);
 }
+
+/**
+ * strn_cmp - compares two strings
+ *		checks if they are equal up to the first num characters
+ * @s1: string one compared
+ * @s2: string compared with string one
+ * @num: compares the first num characters of s1 and s2
+ * Return: 0 on success
+ */
+int strn_cmp(const char *s1, const char *s2, size_t num)
+{
+	size_t i;
+
+	for (i = 0; i < num; i++)
+	{
+		if ((*s1 == '\0' || *s1 != *s2) && i < num)
+			return (*s1 - *s2);
+
+		s1++;
+		s2++;
+	}
+	return (0);
+}
+
