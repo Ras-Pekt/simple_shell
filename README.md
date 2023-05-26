@@ -64,6 +64,20 @@ and non-interactive mode
 	$
 ```
 
+## Some working Commands
+	ls
+pwd
+	cd
+	touch
+	echo
+	cat
+	rm
+	clear
+	rm
+	mkdir
+	exit
+	setenv & unsetenv
+
 ## Contributors
 
 **Authors:** *Gituku and Lavender*
