@@ -65,8 +65,9 @@ and non-interactive mode
 ```
 
 ## Some working Commands
+```
 	ls
-pwd
+	pwd
 	cd
 	touch
 	echo
@@ -77,7 +78,7 @@ pwd
 	mkdir
 	exit
 	setenv & unsetenv
-
+```
 ## Contributors
 
 **Authors:** *Gituku and Lavender*
