@@ -13,7 +13,8 @@ int main(int ac, char **av, char **env)
 	int tok_return;
 	static int count = 1;
 
-	(void)ac;
+	if (ac > 1)
+		file_reader(ac, av, count);
 
 	while (1)
 	{

@@ -80,7 +80,7 @@ char *str_cat(char *dest, char *src)
  * @s: input variable
  * Return: length of string
  */
-int str_len(char *s)
+int str_len(const char *s)
 {
 	int sum = 0;
 

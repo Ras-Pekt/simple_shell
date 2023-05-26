@@ -32,10 +32,8 @@ int splitString(char *str, char **tokenArray, int max)
 	token = strtok(str, " \n");
 	while (token != NULL && i < max)
 	{
-		if (str_cmp(token, "#") == 0)
-		{
+		if (str_cmp(token, "#") == 0 || token[0] == '#')
 			break;
-		}
 		tokenArray[i] = token;
 		i++;
 		token = strtok(NULL, " \n");

@@ -35,7 +35,7 @@ void ctrl_d(char *str);
 int str_cmp(char *s1, char *s2);
 char *str_dup(const char *str);
 char *str_cat(char *dest, char *src);
-int str_len(char *s);
+int str_len(const char *s);
 int strn_cmp(const char *s1, const char *s2, size_t num);
 
 char *_check_executable(char **argv);
@@ -57,5 +57,7 @@ int _env(char **env);
 void _setenv(char **tokenArray);
 void _unsetenv(char **tokenArray);
 void _chdir(char **tokenArray);
+
+void file_reader(int ac, char **av, int count);
 
 #endif

@@ -92,7 +92,7 @@ void _chdir(char **tokenArray)
 	/*the current pwd is the nxtOldPwd*/
 	char *nxtOldPwd = getcwd(path, 128);
 
-	if (tokenArray[1] == NULL)
+	if (tokenArray[1] == NULL || str_cmp(tokenArray[1], "~") == 0)
 	{
 		if (chdir(_getenv("HOME")) != 0)
 			perror("cd");
@@ -102,7 +102,7 @@ void _chdir(char **tokenArray)
 	else if (str_cmp(tokenArray[1], "-") == 0)
 	{
 		if (_getenv("OLDPWD") == NULL)
-			_puterror("./mysh: cd: OLDPWD not set\n");
+			_puterror("cd: OLDPWD not set\n");
 		if (chdir(_getenv("OLDPWD")) != 0)
 			perror("cd");
 		setenv("OLDPWD", nxtOldPwd, 1);
@@ -110,9 +110,14 @@ void _chdir(char **tokenArray)
 	}
 	else
 	{
-		if (chdir(tokenArray[1]) != 0)
-			perror("cd");
-		setenv("OLDPWD", nxtOldPwd, 1);
-		setenv("PWD", getcwd(path, 128), 1);
+		if (access(tokenArray[1], R_OK | X_OK) != 0)
+			_puterror("cd: Permission denied\n");
+		else
+		{
+			if (chdir(tokenArray[1]) != 0)
+				perror("cd");
+			setenv("OLDPWD", nxtOldPwd, 1);
+			setenv("PWD", getcwd(path, 128), 1);
+		}
 	}
 }

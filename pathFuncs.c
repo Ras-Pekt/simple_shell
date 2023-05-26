@@ -1,22 +1,32 @@
 #include "shell.h"
 
 /**
-* free_list - frees a list
-* @head: first node
-* Return: void
+* _getenv - iterates through the environ global variable
+*	to locate a specific variable
+* @name: name of the global variable being searched for.
+*	it is passed in uppercase
+*	global variables are typical declared in uppercase)
+* Return: the value of the specified environ global variable.
+*	EXIT_FAILURE with appropriate error message otherwise
 */
-void free_list(list_t *head)
+char *_getenv(const char *name)
 {
-	list_t *temp;
+	int i = 0, var_len;
+	char *result;
 
-	while (head != NULL)
+	var_len = str_len(name);
+
+	while (environ[i])
 	{
-		temp = head;
-		head = head->next;
-		free(temp->str);
-		free(temp);
+		if (strn_cmp(name, environ[i], var_len) == 0 && environ[i][var_len] == '=')
+		{
+			result = &environ[i][var_len + 1];
+			return (result);
+		}
+		i++;
 	}
-	head = NULL;
+
+	return (NULL);
 }
 /**
 * _path - creates a linked list where each node represents a directory path
@@ -31,10 +41,11 @@ list_t *_path(void)
 	list_t *head = NULL, *newNode;
 
 	str = _getenv("PATH");
-	dupStr = str_dup(str);
 
-	if (dupStr == NULL)
+	if (str == NULL)
 		return (NULL);
+
+	dupStr = str_dup(str);
 
 	token = strtok(dupStr, ":");
 	while (token)
@@ -85,7 +96,6 @@ char *_getpath(char *str)
 		str_cat(new_path, str);
 		if (access(new_path, X_OK) == 0)
 		{
-			/*test if copying the contents will yield the same results*/
 			cmd_path = new_path;
 			break;
 		}
@@ -95,31 +105,21 @@ char *_getpath(char *str)
 	return (cmd_path);
 }
 /**
-* _getenv - iterates through the environ global variable
-*	to locate a specific variable
-* @name: name of the global variable being searched for.
-*	it is passed in uppercase
-*	global variables are typical declared in uppercase)
-* Return: the value of the specified environ global variable.
-*	EXIT_FAILURE with appropriate error message otherwise
+* free_list - frees a list
+* @head: first node
+* Return: void
 */
-char *_getenv(const char *name)
+void free_list(list_t *head)
 {
-	int i = 0, var_len;
-	char *result;
+	list_t *temp;
 
-	var_len = strlen(name);
-
-	while (environ[i])
+	while (head != NULL)
 	{
-		if (strn_cmp(name, environ[i], var_len) == 0 && environ[i][var_len] == '=')
-		{
-			result = &environ[i][var_len + 1];
-			return (result);
-		}
-		i++;
+		temp = head;
+		head = head->next;
+		free(temp->str);
+		free(temp);
 	}
-
-	return (NULL);
+	head = NULL;
 }
 
